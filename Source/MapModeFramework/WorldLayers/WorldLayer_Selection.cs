@@ -104,7 +104,7 @@ namespace MapModeFramework
                 {
                     return selectedRegion;
                 }
-                int selectedTile = Find.WorldSelector.selectedTile;
+                int selectedTile = Find.WorldSelector.SelectedTile;
                 if (!ModCompatibility.DrawTile(selectedTile))
                 {
                     return null;

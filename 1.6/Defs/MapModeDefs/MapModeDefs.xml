@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	
+	<MapModeFramework.MapModeDef>
+		<mapModeClass>MapModeFramework.MapMode_Default</mapModeClass>
+		<defName>Default</defName>
+		<label>Default</label>
+		
+		<drawWorldObjects>true</drawWorldObjects>
+		<drawHills>true</drawHills>
+		<drawRivers>true</drawRivers>
+		<drawRoads>true</drawRoads>
+		<drawPollution>true</drawPollution>
+		<disableFeaturesText>false</disableFeaturesText>
+		
+		<iconPath>UI/MapModes/Default</iconPath>
+	</MapModeFramework.MapModeDef>
+	
+	<MapModeFramework.MapModeDef Name="MapMode_Terrain" Abstract="True">
+		<mapModeClass>MapModeFramework.MapMode_Terrain</mapModeClass>
+		<worldLayerClass>MapModeFramework.WorldLayer_MapMode_Terrain</worldLayerClass>
+		<drawWorldObjects>false</drawWorldObjects>
+		<drawHills>false</drawHills>
+		<drawRivers>true</drawRivers>
+		<drawRoads>false</drawRoads>
+		<drawPollution>false</drawPollution>
+		<disableFeaturesText>true</disableFeaturesText>
+		<displayLabels>true</displayLabels>
+		<doTooltip>true</doTooltip>
+	</MapModeFramework.MapModeDef>
+	
+	<MapModeFramework.MapModeDef ParentName="MapMode_Terrain">
+		<mapModeClass>MapModeFramework.MapMode_Biome</mapModeClass>
+		<defName>Biome</defName>
+		<label>Biome</label>
+		
+		<displayLabels>false</displayLabels>
+		<doTooltip>false</doTooltip>
+		
+		<iconPath>UI/MapModes/Biome</iconPath>
+	</MapModeFramework.MapModeDef>
+	
+	<MapModeFramework.MapModeDef ParentName="MapMode_Terrain">
+		<defName>Temperature</defName>
+		<label>Temperature</label>
+		<iconPath>UI/MapModes/Temperature</iconPath>
+	</MapModeFramework.MapModeDef>
+	
+	<MapModeFramework.MapModeDef ParentName="MapMode_Terrain">
+		<defName>Elevation</defName>
+		<label>Elevation</label>
+		<iconPath>UI/MapModes/Elevation</iconPath>
+	</MapModeFramework.MapModeDef>
+	
+	<MapModeFramework.MapModeDef ParentName="MapMode_Terrain">
+		<defName>Rainfall</defName>
+		<label>Rainfall</label>
+		<iconPath>UI/MapModes/Rainfall</iconPath>
+	</MapModeFramework.MapModeDef>
+	
+	<MapModeFramework.MapModeDef ParentName="MapMode_Terrain">
+		<mapModeClass>MapModeFramework.MapMode_GrowingPeriod</mapModeClass>
+		<defName>GrowingPeriod</defName>
+		<label>Growing Period</label>
+		<canCache>true</canCache>
+		
+		<displayLabels>false</displayLabels>
+		<doTooltip>true</doTooltip>
+		
+		<iconPath>UI/MapModes/GrowingPeriod</iconPath>
+	</MapModeFramework.MapModeDef>
+	
+	<MapModeFramework.MapModeDef ParentName="MapMode_Terrain">
+		<mapModeClass>MapModeFramework.MapMode_AnimalCommonality</mapModeClass>
+		<defName>AnimalCommonality</defName>
+		<label>Animal Commonality</label>
+		
+		<iconPath>UI/MapModes/AnimalCommonality</iconPath>
+	</MapModeFramework.MapModeDef>
+	
+	<MapModeFramework.MapModeDef ParentName="MapMode_Terrain">
+		<mapModeClass>MapModeFramework.MapMode_PlantCommonality</mapModeClass>
+		<defName>PlantCommonality</defName>
+		<label>Plant Commonality</label>
+		
+		<iconPath>UI/MapModes/PlantCommonality</iconPath>
+	</MapModeFramework.MapModeDef>
+	
+	<!--
+	<MapModeFramework.MapModeDef ParentName="MapMode_Terrain">
+		<mapModeClass>MapModeFramework.MapMode_RockTypes</mapModeClass>
+		<defName>RockTypes</defName>
+		<label>Rock Types</label>
+		
+		<iconPath>UI/MapModes/RockTypes</iconPath>
+	</MapModeFramework.MapModeDef>
+	-->
+	
+	<MapModeFramework.MapModeDef>
+		<mapModeClass>MapModeFramework.MapMode_Features</mapModeClass>
+		<worldLayerClass>MapModeFramework.WorldLayer_MapMode_Region</worldLayerClass>
+		<defName>Features</defName>
+		<label>Features</label>
+		<canCache>true</canCache>
+		
+		<drawWorldObjects>true</drawWorldObjects>
+		<drawHills>true</drawHills>
+		<drawRivers>true</drawRivers>
+		<drawRoads>true</drawRoads>
+		<drawPollution>true</drawPollution>
+		<disableFeaturesText>false</disableFeaturesText>
+		<doTooltip>true</doTooltip>
+		
+		<iconPath>UI/MapModes/Features</iconPath>
+		<RegionProperties>
+			<overrideSelector>true</overrideSelector>
+			<doBorders>true</doBorders>
+			<borderWidth>0.5</borderWidth>
+		</RegionProperties>
+	</MapModeFramework.MapModeDef>
+	
+</Defs>

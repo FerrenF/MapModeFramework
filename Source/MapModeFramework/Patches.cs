@@ -24,7 +24,7 @@ namespace MapModeFramework
     {
         public static async void Prefix(Page __instance)
         {
-            if (!(__instance is Page_SelectStartingSite))
+            if (__instance is not Page_SelectStartingSite)
             {
                 return;
             }
@@ -42,7 +42,7 @@ namespace MapModeFramework
             {
                 return true;
             }
-            if (!(mapModeComponent.currentMapMode is MapMode_Region mapModeRegion))
+            if (mapModeComponent.currentMapMode is not MapMode_Region mapModeRegion)
             {
                 return true;
             }
@@ -57,8 +57,26 @@ namespace MapModeFramework
                 SoundDefOf.Click.PlayOneShotOnCamera();
             }
             WorldLayer_SelectedRegion.Instance.selectedRegion = region;
-            __instance.selectedTile = -1;
+            __instance.SelectedTile = -1;
             return false;
+        }
+
+        public static void Postfix(bool canSelectTile = true)
+        {
+            int tile = canSelectTile ? GenWorld.MouseTile() : -1;
+            if (tile == -1)
+            {
+                return;
+            }
+            MapModeComponent mapModeComponent = MapModeComponent.Instance;
+            if (mapModeComponent == null)
+            {
+                return;
+            }
+            if (mapModeComponent.currentMapMode is IMapMode_Window mapModeWindow && mapModeWindow.HasWindow(tile))
+            {
+                mapModeWindow.OpenWindow();
+            }
         }
     }
 
@@ -108,18 +126,18 @@ namespace MapModeFramework
         }
     }
 
-    [HarmonyPatch(typeof(WorldLayer), nameof(WorldLayer.Render))]
-    public static class WorldLayer_Render_Patch
+    [HarmonyPatch(typeof(WorldDrawLayerBase), nameof(WorldDrawLayerBase.Render))]
+    public static class WorldDrawLayerBase_Render_Patch
     {
         public static Dictionary<Type, Func<DrawSettings, bool>> disableRendering = new Dictionary<Type, Func<DrawSettings, bool>>()
         {
-            { typeof(WorldLayer_Hills), settings => settings.drawHills },
-            { typeof(WorldLayer_Rivers), settings => settings.drawRivers },
-            { typeof(WorldLayer_Roads), settings => settings.drawRoads },
-            { typeof(WorldLayer_Pollution), settings => settings.drawPollution }
+            { typeof(WorldDrawLayer_Hills), settings => settings.drawHills },
+            { typeof(WorldDrawLayer_Rivers), settings => settings.drawRivers },
+            { typeof(WorldDrawLayer_Roads), settings => settings.drawRoads },
+            { typeof(WorldDrawLayer_Pollution), settings => settings.drawPollution }
         };
 
-        public static bool Prefix(WorldLayer __instance)
+        public static bool Prefix(WorldDrawLayerBase __instance)
         {
             MapModeComponent mapModeComponent = MapModeComponent.Instance;
             if (mapModeComponent == null)
@@ -127,7 +145,7 @@ namespace MapModeFramework
                 return true;
             }
             bool overrideSelector = mapModeComponent.currentMapMode is MapMode_Region mapModeRegion && mapModeRegion.def.RegionProperties.overrideSelector;
-            bool isSelectorLayer = __instance is WorldLayer_MouseTile || __instance is WorldLayer_SelectedTile;
+            bool isSelectorLayer = __instance is WorldDrawLayer_MouseTile || __instance is WorldDrawLayer_SelectedTile;
             if (overrideSelector && isSelectorLayer)
             {
                 return false;

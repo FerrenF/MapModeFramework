@@ -124,9 +124,15 @@ namespace MapModeFramework
         public virtual string GetTooltip(int tile) => string.Empty;
     }
 
+    public interface IMapMode_Window
+    {
+        public abstract bool HasWindow(int tile);
+        public abstract void OpenWindow();
+    }
+
     public abstract class MapMode_Cached : MapMode
     {
-        public bool EnabledCaching => def.canCache && Core.settings.enabledCaching[def].EnableCache;
+        public bool EnabledCaching => def.canCache && Core.settings.enabledCaching[def]?.EnableCache == true;
         public bool CacheOnStart => EnabledCaching && Core.settings.enabledCaching[def].CacheOnStart;
 
         public override bool Active => !cachingNow;

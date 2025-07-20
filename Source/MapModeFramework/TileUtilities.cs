@@ -10,9 +10,9 @@ namespace MapModeFramework
     {
         private static WorldGrid Grid => Find.WorldGrid;
 
-        public static List<int> GetTileNeighbors(int tile)
+        public static List<PlanetTile> GetTileNeighbors(int tile)
         {
-            List<int> neighbors = new List<int>();
+            List<PlanetTile> neighbors = new List<PlanetTile>();
             Grid.GetTileNeighbors(tile, neighbors);
             return neighbors;
         }
@@ -60,7 +60,7 @@ namespace MapModeFramework
 
         public static bool IsBorderTile(int tile, HashSet<int> tiles)
         {
-            List<int> neighbors = GetTileNeighbors(tile);
+            List<PlanetTile> neighbors = GetTileNeighbors(tile);
             return neighbors.Any(x => !tiles.Contains(x));
         }
 

@@ -76,7 +76,7 @@ namespace MapModeFramework
 
         public override void WindowUpdate()
         {
-            if (!WorldRendererUtility.WorldRenderedNow)
+            if (!WorldRendererUtility.WorldRendered)
             {
                 Close();
                 return;

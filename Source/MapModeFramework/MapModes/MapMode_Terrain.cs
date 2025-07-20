@@ -127,7 +127,7 @@ namespace MapModeFramework
 
         public override bool IsSelectedTile(int tile)
         {
-            return Find.WorldGrid[tile].biome == selected;
+            return Find.WorldGrid[tile].PrimaryBiome == selected;
         }
     }
 
@@ -152,7 +152,7 @@ namespace MapModeFramework
 
         public override bool IsSelectedTile(int tile)
         {
-            BiomeDef biome = Find.WorldGrid[tile].biome;
+            BiomeDef biome = Find.WorldGrid[tile].PrimaryBiome;
             float commonality = biome.CommonalityOfAnimal(selected);
             if (commonality > 0f)
             {
@@ -165,7 +165,7 @@ namespace MapModeFramework
         {
             if (IsSelectedTile(tile))
             {
-                BiomeDef biome = Find.WorldGrid[tile].biome;
+                BiomeDef biome = Find.WorldGrid[tile].PrimaryBiome;
                 float commonality = biome.CommonalityOfAnimal(selected);
                 return Materials.MatForCommonalityOverlay(commonality);
             }
@@ -176,7 +176,7 @@ namespace MapModeFramework
         {
             if (IsSelectedTile(tile))
             {
-                BiomeDef biome = Find.WorldGrid[tile].biome;
+                BiomeDef biome = Find.WorldGrid[tile].PrimaryBiome;
                 float commonality = biome.CommonalityOfAnimal(selected);
                 return commonality.ToStringPercent();
             }
@@ -187,7 +187,7 @@ namespace MapModeFramework
         {
             if (IsSelectedTile(tile))
             {
-                BiomeDef biome = Find.WorldGrid[tile].biome;
+                BiomeDef biome = Find.WorldGrid[tile].PrimaryBiome;
                 float commonality = biome.CommonalityOfAnimal(selected);
                 return $"{selected.LabelCap}\n- {"MMF.Commonality".Translate()}: {commonality.ToStringPercent()}";
             }
@@ -216,7 +216,7 @@ namespace MapModeFramework
 
         public override bool IsSelectedTile(int tile)
         {
-            BiomeDef biome = Find.WorldGrid[tile].biome;
+            BiomeDef biome = Find.WorldGrid[tile].PrimaryBiome;
             float commonality = biome.CommonalityOfPlant(selected);
             if (commonality > 0f)
             {
@@ -229,7 +229,7 @@ namespace MapModeFramework
         {
             if (IsSelectedTile(tile))
             {
-                BiomeDef biome = Find.WorldGrid[tile].biome;
+                BiomeDef biome = Find.WorldGrid[tile].PrimaryBiome;
                 float commonality = biome.CommonalityOfPlant(selected);
                 return Materials.MatForCommonalityOverlay(commonality);
             }
@@ -240,7 +240,7 @@ namespace MapModeFramework
         {
             if (IsSelectedTile(tile))
             {
-                BiomeDef biome = Find.WorldGrid[tile].biome;
+                BiomeDef biome = Find.WorldGrid[tile].PrimaryBiome;
                 float commonality = biome.CommonalityOfPlant(selected);
                 return commonality.ToStringPercent();
             }
@@ -251,7 +251,7 @@ namespace MapModeFramework
         {
             if (IsSelectedTile(tile))
             {
-                BiomeDef biome = Find.WorldGrid[tile].biome;
+                BiomeDef biome = Find.WorldGrid[tile].PrimaryBiome;
                 float commonality = biome.CommonalityOfPlant(selected);
                 return $"{selected.LabelCap}\n- {"MMF.Commonality".Translate()}: {commonality.ToStringPercent()}";
             }
@@ -307,7 +307,6 @@ namespace MapModeFramework
 
             var allTiles = Enumerable.Range(0, tilesCount - 1);
             tilesToCache = allTiles.Where(x => WorldLayer.ValidTile(x)).Count();
-
             for (int i = 0; i < tilesCount; i++)
             {
                 token.ThrowIfCancellationRequested();

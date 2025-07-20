@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RimWorld.Planet;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -188,7 +189,7 @@ namespace MapModeFramework
                 drawEdges = new bool[edges.Count];
                 Array.Fill(drawEdges, true);
 
-                List<int> neighbors = TileUtilities.GetTileNeighbors(tile);
+                List<PlanetTile> neighbors = TileUtilities.GetTileNeighbors(tile);
                 HashSet<Vector3> edgeVertices = new HashSet<Vector3>();
                 int neighborsCount = neighbors.Count;
                 for (int i = 0; i < neighborsCount; i++)

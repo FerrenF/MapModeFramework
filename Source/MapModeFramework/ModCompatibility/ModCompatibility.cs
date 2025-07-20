@@ -78,7 +78,7 @@ namespace MapModeFramework
             Type worldLayer = assembly.GetTypes().FirstOrDefault(x => x.FullName.Contains(worldLayerName));
             if (worldLayer != null)
             {
-                WorldLayer_Render_Patch.disableRendering.Add(worldLayer, setting);
+                WorldDrawLayerBase_Render_Patch.disableRendering.Add(worldLayer, setting);
             }
             else
             {

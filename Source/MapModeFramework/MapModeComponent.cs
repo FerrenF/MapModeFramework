@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using Verse;
 
 namespace MapModeFramework
@@ -104,7 +105,7 @@ namespace MapModeFramework
             for (int i = 0; i < mapModeCount; i++)
             {
                 MapMode mapMode = mapModes[i];
-                if (!(mapMode is MapMode_Cached mapModeCached))
+                if (mapMode is not MapMode_Cached mapModeCached)
                 {
                     continue;
                 }
@@ -121,7 +122,7 @@ namespace MapModeFramework
         public override void GameComponentUpdate()
         {
             MapModeUI mapModeUI = Find.WindowStack.WindowOfType<MapModeUI>();
-            if (WorldRendererUtility.WorldRenderedNow && mapModeUI == null)
+            if (WorldRendererUtility.WorldRendered && mapModeUI == null)
             {
                 Find.WindowStack.Add(new MapModeUI(this));
             }
@@ -130,7 +131,7 @@ namespace MapModeFramework
 
         public override void GameComponentOnGUI()
         {
-            if (!WorldRendererUtility.WorldRenderedNow)
+            if (!WorldRendererUtility.WorldRendered)
             {
                 return;
             }

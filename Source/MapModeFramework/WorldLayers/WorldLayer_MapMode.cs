@@ -11,7 +11,7 @@ using Verse;
 
 namespace MapModeFramework
 {
-    public abstract class WorldLayer_MapMode : WorldLayer
+    public abstract class WorldLayer_MapMode : WorldDrawLayer
     {
         public MapModeComponent MapModeComponent => MapModeComponent.Instance;
         public MapMode CurrentMapMode => MapModeComponent.currentMapMode;
@@ -119,8 +119,7 @@ namespace MapModeFramework
         {
             token.ThrowIfCancellationRequested();
             WorldGrid grid = Find.WorldGrid;
-            List<Tile> tiles = grid.tiles;
-            int tilesCount = tiles.Count;
+            int tilesCount = grid.TilesCount;
 
             token.ThrowIfCancellationRequested();
             var allTiles = Enumerable.Range(0, tilesCount - 1);
